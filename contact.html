@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — King Kadooh</title>
+  <meta name="description" content="Get in touch with King Kadooh for web development, security reviews, or Web3/DeFi consulting." />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <a href="/" class="brand">King Kadooh</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/work.html">Work</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="contact-wrap" id="contact-form-wrap">
+      <h1>Contact</h1>
+      <p>Looking for a web developer, a security review, or a hand navigating Web3 and DeFi? Send a message and I'll get back to you.</p>
+
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden>
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name" />
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com" />
+        </div>
+
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required rows="6" placeholder="Your message..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <div class="success-state" id="success-state" hidden>
+      <div class="inner">
+        <div class="success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        </div>
+        <h2>Message Sent!</h2>
+        <p>Thanks for reaching out. I'll get back to you as soon as possible.</p>
+        <button class="btn btn-primary" id="send-another">Send Another Message</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © <span id="year"></span> King Kadooh. All rights reserved.
+  </footer>
+
+  <script src="/script.js"></script>
+  <script>
+    const form = document.getElementById('contact-form')
+    const formWrap = document.getElementById('contact-form-wrap')
+    const successState = document.getElementById('success-state')
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const formData = new FormData(form)
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString(),
+      }).then(() => {
+        formWrap.hidden = true
+        successState.hidden = false
+      })
+    })
+
+    document.getElementById('send-another').addEventListener('click', () => {
+      form.reset()
+      successState.hidden = true
+      formWrap.hidden = false
+    })
+  </script>
+</body>
+</html>
