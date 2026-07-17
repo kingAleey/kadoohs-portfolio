@@ -1,4 +1,3 @@
-
 :root{
   --bg: #ffffff;
   --surface: #ffffff;
@@ -18,6 +17,7 @@
   --container-pad: 1rem;
   --accent-weak: rgba(15,98,254,0.06);
   --touch-target: 48px;
+  --header-height: 64px;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -33,11 +33,15 @@ body{
   flex-direction:column;
   line-height:1.45;
   -webkit-tap-highlight-color:transparent;
+  padding-top:var(--header-height);
 }
 .wrapper, .site-header nav, main{max-width:var(--max-width); margin:0 auto; padding:0 var(--container-pad); width:100%}
 .site-header{
-  position:sticky;
+  position:fixed;
   top:0;
+  left:0;
+  right:0;
+  height:var(--header-height);
   z-index:100;
   background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
   border-bottom:none;
@@ -51,6 +55,7 @@ body{
   justify-content:space-between;
   gap:1rem;
   padding:.65rem 0;
+  height:100%;
 }
 .brand{
   font-weight:900;
